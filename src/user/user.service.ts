@@ -28,9 +28,9 @@ export class UserService {
       const hash = await bcrypt.hash(password, 10);
       const user = this.userRepository.create({ ...body, password: hash });
       this.userRepository.save(user);
-      return 'user created';
+      return 'Utilisateur crée';
     } catch (error) {
-      throw new ConflictException(error);
+      throw new ConflictException('Cet utilisateur existe déja');
     }
   }
 
@@ -39,9 +39,9 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: { username: username },
     });
-    if (!user) throw new NotFoundException('User not Found');
+    if (!user) throw new NotFoundException('User non existant');
     const match = await bcrypt.compare(password, user.password);
-    if (!match) throw new UnauthorizedException('Invalid password');
-    return user;
+    if (!match) throw new UnauthorizedException('Mot de passe invalide');
+    return 'Utilisateur connecté';
   }
 }

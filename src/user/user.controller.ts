@@ -22,14 +22,12 @@ export class UserController {
   }
 
   @Post('/signup')
-  @Redirect('/user/login')
   async postSignup(@Body() body: SignupDto) {
     return { message: await this.userService.postSignup(body) };
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('/login')
-  @Redirect('/')
   async postLogin(
     @Body() body: LoginDto,
     @Session() session: Record<string, any>,
@@ -37,6 +35,5 @@ export class UserController {
     const user = await this.userService.postLogin(body);
     session.user = user;
     session.connected = true;
-    console.log(session);
   }
 }
