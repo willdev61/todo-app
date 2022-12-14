@@ -16,14 +16,9 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-  @Get('/signup')
-  getSignup() {
-    return "page d'inscription";
-  }
-
-  @Get('/login')
+  @Get()
   getLogin() {
-    return 'Page de connexion';
+    return this.userService.getLogin();
   }
 
   @Post('/signup')
@@ -42,5 +37,6 @@ export class UserController {
     const user = await this.userService.postLogin(body);
     session.user = user;
     session.connected = true;
+    console.log(session);
   }
 }

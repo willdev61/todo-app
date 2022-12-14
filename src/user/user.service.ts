@@ -18,6 +18,10 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
+  getLogin() {
+    return this.userRepository.find();
+  }
+
   async postSignup(body: SignupDto): Promise<string> {
     try {
       const { password } = body;
@@ -26,7 +30,7 @@ export class UserService {
       this.userRepository.save(user);
       return 'user created';
     } catch (error) {
-      throw new ConflictException();
+      throw new ConflictException(error);
     }
   }
 
