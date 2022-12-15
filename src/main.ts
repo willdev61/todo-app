@@ -14,6 +14,8 @@ async function bootstrap() {
     }),
   );
 
+  app.enableCors();
+
   app.use(
     session({
       secret: 'my-secret',
