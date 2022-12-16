@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateTodoDto {
   @IsNotEmpty()
@@ -8,6 +14,6 @@ export class CreateTodoDto {
   @MaxLength(500)
   readonly description?: string;
 
-  @IsString()
-  readonly status: 'A faire' | 'Non accomplie' | 'Accomplie';
+  @IsBoolean()
+  readonly status: boolean;
 }
