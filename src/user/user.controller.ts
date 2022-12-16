@@ -4,7 +4,6 @@ import {
   Controller,
   Get,
   Post,
-  Redirect,
   UseInterceptors,
   Session,
 } from '@nestjs/common';
